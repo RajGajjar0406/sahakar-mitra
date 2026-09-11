@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NyayaMitra AI - Technical Approach & Functional Prototype UI</title>
+  <link rel="stylesheet" href="css/styles.css?v=4.0" />
+</head>
+<body class="light-theme">
+
+  <!-- Top Title Banner (Exact match to SIH Presentation Slide) -->
+  <header class="presentation-header">
+    <div class="top-meta-left">
+      <h2 class="slide-title">Technical Approach & Functional Prototype UI</h2>
+    </div>
+    <div class="top-meta-right">
+      <span class="freshers-badge">Built by 1st-Sem Freshers (HTML/CSS/JS)</span>
+    </div>
+  </header>
+
+  <!-- Sub Navigation & Branding Bar -->
+  <nav class="sub-nav-bar">
+    <div class="brand-zone">
+      <div class="brand-title">
+        <span class="brand-emblem">⚖️</span>
+        <span class="brand-name">NyayaMitra AI</span>
+      </div>
+      <span class="brand-subtext">Local Constitution DB (Zero API)</span>
+    </div>
+
+    <div class="nav-controls">
+      <!-- Role Selector -->
+      <div class="control-pill">
+        <label for="roleSelect">Role:</label>
+        <select id="roleSelect" class="pill-select">
+          <option value="citizen">👥 Local Citizen / Member</option>
+          <option value="farmer">👨‍🌾 Farmer / Agri-Producer</option>
+          <option value="lawyer">⚖️ Advocate / Legal Counsel</option>
+          <option value="coop_official">🏛️ Cooperative Official</option>
+          <option value="dept_officer">🏢 Dept. Registrar</option>
+          <option value="student">🎓 Student / Researcher</option>
+        </select>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="control-pill">
+        <label for="langSelect">Language:</label>
+        <select id="langSelect" class="pill-select">
+          <option value="en">English (Auto-Detects Hinglish)</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+        </select>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button id="themeToggleBtn" class="theme-btn" title="Toggle Light / Dark Mode">
+        🌙
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Application Workspace -->
+  <div class="app-layout">
+    
+    <!-- Left Floating Dock: Document Upload (Exact match to Mockup) -->
+    <aside class="left-dock">
+      <div class="dock-card upload-dock-card" id="uploadDockBtn">
+        <div class="dock-icon">📄</div>
+        <div class="dock-info">
+          <h4>Document Upload</h4>
+          <p>Local PDF/TXT parsing ready.</p>
+        </div>
+      </div>
+
+      <!-- Active Document Tag -->
+      <div id="activeDocBanner" class="active-doc-tag hidden">
+        <span>📄 <strong id="activeDocName">Bylaws.txt</strong></span>
+        <button id="clearDocBtn" class="clear-tag-btn" title="Clear Document">&times;</button>
+      </div>
+    </aside>
+
+    <!-- Center Interactive Chat Canvas -->
+    <main class="chat-canvas">
+      
+      <!-- Messages Stream -->
+      <div id="chatMessages" class="chat-stream">
+        
+        <!-- Welcome / Starter View -->
+        <div class="starter-banner" id="starterBanner">
+          <div class="starter-tag">SIH 2026 Interactive Prototype</div>
+          <h3>Multilingual Legal & Cooperative Assistance</h3>
+          <p>Connects directly to the Constitution of India, Cooperative Statutes & Citizen Services. Type in English, Hinglish, Hindi, or Gujarati!</p>
+          
+          <div class="starter-chips">
+            <button class="chip" onclick="handleChipClick('Kisan credit card ke liye kya legal right hai bhai?')">
+              🌾 Kisan credit card ke liye kya right hai?
+            </button>
+            <button class="chip" onclick="handleChipClick('bhai mujhe addhar card me name change karvana hai to steps batao')">
+              🆔 Aadhaar card me name change steps
+            </button>
+            <button class="chip" onclick="handleChipClick('section 302')">
+              ⚖️ Section 302 IPC / BNS
+            </button>
+            <button class="chip" onclick="handleChipClick('Cooperative society me dispute ho gaya to kya kare?')">
+              🏛️ Cooperative Society Dispute (Sec 84)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Input Bar (Exact match to Mockup) -->
+      <div class="input-dock-container">
+        <div class="input-bar-pill">
+          
+          <!-- Mic Button -->
+          <button id="micBtn" class="mic-icon-btn" title="Click to speak (Speech-to-Text)">
+            🎙️
+          </button>
+
+          <!-- Input Box -->
+          <input
+            type="text"
+            id="userInput"
+            class="main-text-input"
+            placeholder="Ask in Hinglish, Tamil, Bengali or English..."
+            autocomplete="off"
+          />
+
+          <!-- Send Button -->
+          <button id="sendBtn" class="send-action-btn">
+            ✈️ Send
+          </button>
+
+        </div>
+        <div id="micStatus" class="mic-indicator hidden">🎙️ Listening... Speak now in your language</div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Document Upload Modal -->
+  <div id="uploadModal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📄 Document Legal Compliance Audit</h3>
+        <button id="closeModalBtn" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-field">
+          <label for="sampleDocSelect">Select Pre-loaded Sample Bylaws:</label>
+          <select id="sampleDocSelect" class="pill-select" style="width: 100%;">
+            <option value="">-- Choose Sample Document to Test --</option>
+          </select>
+        </div>
+
+        <div id="fileDropZone" class="file-drop-card">
+          <div class="drop-icon">📁</div>
+          <p><strong>Click to choose file</strong> or drag & drop</p>
+          <small>Supports .txt, .pdf bylaws, loan notices & agreements</small>
+          <input type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx" style="display: none;" />
+        </div>
+
+        <!-- Audit Output -->
+        <div id="auditResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts with Cache-Buster v4.0 -->
+  <script src="js/legal_database.js?v=4.0"></script>
+  <script src="js/multilingual_engine.js?v=4.0"></script>
+  <script src="js/speech_engine.js?v=4.0"></script>
+  <script src="js/document_processor.js?v=4.0"></script>
+  <script src="js/app.js?v=4.0"></script>
+
+</body>
+</html>
